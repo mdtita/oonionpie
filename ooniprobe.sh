@@ -16,11 +16,11 @@ if ! which wget > /dev/null; then
 fi
 
 #Fetch Golang
-wget https://golang.org/dl/go1.15.5.linux-armv6l.tar.gz
+wget https://golang.org/dl/go1.16.3.linux-armv6l.tar.gz
 
 #install go
 echo "Installing go ..."
-sudo tar --overwrite -C /usr/local -xzf go1.15.5.linux-armv6l.tar.gz
+sudo tar --overwrite -C /usr/local -xzf go1.16.3.linux-armv6l.tar.gz
 
 #Add go to PATH
 echo 'export PATH=$PATH:/usr/local/go/bin' >> /home/$USER/.bashrc
@@ -46,6 +46,6 @@ mkdir -p /home/$USER/opt/ooniprobe
 git clone https://github.com/ooni/probe-cli.git /home/$USER/opt/ooniprobe
 #build ooniprobe
 echo "bulding ooniprobe, this will take some time, grab a coffee ..."
-cd /home/$user/opt/ooniprobe && go build -v ./cmd/ooniprobe
+cd /home/$user/opt/ooniprobe && go build -ldflags='-s -w' -v ./cmd/ooniprobe
 
 echo "if everything went fine you should find the binary in /home/$USER/opt/ooniprobe root dir, run it with ./ooniprobe"
